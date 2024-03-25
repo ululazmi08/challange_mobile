@@ -31,14 +31,16 @@ class AssessmentController extends GetxController {
     try{
       var data = await AssessmentService.assessment(page: page.toString());
       if(data['code'] == 200){
-        page.value += 1;
-        var dataList = data['data'] as List;
-        List<AssessmentModel> list = dataList.map((e) => AssessmentModel.fromJson(e)).toList();
-        if(list.isEmpty){
-          enablePullUp.value = false;
+        if(data['data'] != null){
+          page.value += 1;
+          var dataList = data['data'] as List;
+          List<AssessmentModel> list = dataList.map((e) => AssessmentModel.fromJson(e)).toList();
+          if(list.isEmpty){
+            enablePullUp.value = false;
+          }
+          listAssessment.addAll(list);
+          loadingAssessment.value = false;
         }
-        listAssessment.addAll(list);
-        loadingAssessment.value = false;
       } else {
         // Get.back();
         // Get.dialog(Dialog(child: Column(

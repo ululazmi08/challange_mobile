@@ -46,7 +46,7 @@ class SurveiQuestionPage extends StatelessWidget {
                       mainAxisSpacing: 8,
                       itemBuilder: (context, index) {
                         return Container(
-                          padding: EdgeInsets.all(25),
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             color: controller.currentIndex.value == index
                                 ? kColorBlue.withOpacity(0.2)

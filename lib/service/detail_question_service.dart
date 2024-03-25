@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:challange_mobile/service/api_endpoint.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+
+final storage = GetStorage();
 
 class DetailQuestionService {
   static Future detailQuestion(String assessment_id) async {
@@ -11,7 +14,7 @@ class DetailQuestionService {
       headers: {
         'Accept': '*/*',
         'Content-Type' : 'application/json',
-        'Cookie' : 'refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2lkIjoiIiwicGVybWlzc2lvbnMiOm51bGwsImV4cCI6MTcwODg3MTQwMSwiaXNzIjoiU1lOMTAifQ.4DMdMtHA8_6KZSCfbsujJwLeXxCK7cKGMtMfcoEroM8; token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2lkIjoiNCIsInBlcm1pc3Npb25zIjpbMTMwLDEzMywxMzUsMTM4LDE0MiwxNTQsMSwyLDMsNCw1LDYsOSwxMSwxMiwxMywxNywxMF0sImV4cCI6MTcwNjM2NTgwMSwiaXNzIjoiU1lOMTAifQ.Od9oMcyO5ZMvBXfiKFH3hVBPdLqzYQQUgRinoNM_saw'
+        'Cookie' : '${storage.read('token')}; ${storage.read('refresh_token')}'
       },
       // body: {
       //   "nik": nik,

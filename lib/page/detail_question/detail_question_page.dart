@@ -19,74 +19,85 @@ class DetailQuestionPage extends StatelessWidget {
           child: Column(
             children: [
               Obx(
-                () => Container(
-                  color: kColorWhite,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 9),
-                              decoration: BoxDecoration(
+                () {
+                  int minutes = controller.seconds.value ~/ 60;
+                  int seconds = controller.seconds.value % 60;
+                  String timeLeft = '$minutes:${seconds.toString().padLeft(2, '0')} Time Left';
+                  return Container(
+                    color: kColorWhite,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 9),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                        color: Color(0xFF1FA0C9))),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      timeLeft,
+                                      style: TStyle.w500
+                                          .copyWith(color: Color(0xFF1FA0C9),
+                                          fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: kColorBlack,
                                   borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(color: Color(0xFF1FA0C9))),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '45 Second Left',
-                                    style: TStyle.w500
-                                        .copyWith(color: Color(0xFF1FA0C9)),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: kColorBlack,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                child: InkWell(
-                                  onTap: (){
-                                    Get.toNamed(RouteName.surveiQuestion);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.list_alt,
-                                          color: kColorWhite,
-                                        ),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          '${controller.currentIndex.value + 1}/${controller.detailQuestion.value?.question.length ?? 0}',
-                                          style: TStyle.w500.copyWith(
-                                              fontSize: 15, color: kColorWhite),
-                                        )
-                                      ],
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(RouteName.surveiQuestion);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.list_alt,
+                                            color: kColorWhite,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            '${controller.currentIndex.value +
+                                                1}/${controller.detailQuestion
+                                                .value?.question.length ?? 0}',
+                                            style: TStyle.w500.copyWith(
+                                                fontSize: 15,
+                                                color: kColorWhite),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      // Text(controller.detailQuestion.value?.name ?? ''),
-                      ArrayQuestion()
-                    ],
-                  ),
-                ),
+                        const SizedBox(height: 8),
+                        // Text(controller.detailQuestion.value?.name ?? ''),
+                        ArrayQuestion()
+                      ],
+                    ),
+                  );
+
+                }
               ),
             ],
           ),

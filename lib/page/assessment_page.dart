@@ -1,6 +1,7 @@
 import 'package:challange_mobile/controller/assessment_controller.dart';
 import 'package:challange_mobile/page/detail_question/detail_question_page.dart';
 import 'package:challange_mobile/route/route_name.dart';
+import 'package:challange_mobile/utilities/asset_constant.dart';
 import 'package:challange_mobile/utilities/colors.dart';
 import 'package:challange_mobile/utilities/typography.dart';
 import 'package:flutter/material.dart';
@@ -89,10 +90,7 @@ class AssessmentPage extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 data.image.isEmpty
-                                                    ? Icon(
-                                                        Icons.image,
-                                                        size: 54,
-                                                      )
+                                                    ? Image.asset(AssetConstant.imgExam, width: 54,)
                                                     : Container(
                                                         height: 54,
                                                         width: 54,
@@ -144,8 +142,7 @@ class AssessmentPage extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                Icon(Icons
-                                                    .arrow_downward_rounded)
+                                                Image.asset(AssetConstant.icDownload, width: 24,)
                                               ],
                                             ),
                                           ),

@@ -39,7 +39,7 @@ class AssessmentModel {
   late final Null assessors;
   late final String createdAt;
   late final String updatedAt;
-  late final Null downloadedAt;
+  late final dynamic downloadedAt;
   late final bool hasResponses;
 
   AssessmentModel.fromJson(Map<String, dynamic> json){
@@ -61,7 +61,7 @@ class AssessmentModel {
     assessors = json['assessors'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    downloadedAt = json['downloaded_at'];
+    downloadedAt = json['downloaded_at'] ?? '-';
     hasResponses = json['has_responses'];
   }
 

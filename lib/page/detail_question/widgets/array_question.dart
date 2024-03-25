@@ -109,27 +109,45 @@ class ArrayQuestion extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const SizedBox(height: 12),
-                                  Row(
-                                    children: [
-                                      Obx(() {
-                                        return Radio(
-                                          value: index,
-                                          groupValue: controller.selectedOptionIndex.value,
-                                          onChanged: (value) {
-                                            // Update selected option index
-                                            controller.updateOptionStatus(value??0);
-                                          },
-                                        );
-                                      }),
-                                      Flexible(
-                                        child: Text(
-                                          data?.optionName ?? '',
-                                          style:
-                                              TStyle.w400.copyWith(fontSize: 15),
-                                        ),
-                                      )
-                                    ],
-                                  )
+                                   Obx((){
+                                     if(controller.detailQuestion.value!.question[controller.currentIndex.toInt()].type == 'multiple_choice'){
+                                       return Row(
+                                         children: [
+                                           Obx(() {
+                                             return Radio(
+                                               value: index,
+                                               groupValue: controller.selectedOptionIndex.value,
+                                               onChanged: (value) {
+                                                 // Update selected option index
+                                                 controller.updateOptionStatus(value??0);
+                                               },
+                                             );
+                                           }),
+                                           Flexible(
+                                             child: Text(
+                                               data?.optionName ?? '',
+                                               style:
+                                               TStyle.w400.copyWith(fontSize: 15),
+                                             ),
+                                           )
+                                         ],
+                                       );
+                                     }
+                                     if(controller.detailQuestion.value!.question[controller.currentIndex.toInt()].type == 'checkbox'){
+                                       return CheckboxListTile(
+                                         controlAffinity: ListTileControlAffinity.leading,
+                                         title: Text(data?.optionName ?? '',),
+                                         contentPadding: EdgeInsets.zero,
+                                         value: controller.isCheckedList[index],
+                                         onChanged: (value) {
+                                           controller.toggleCheckbox(index);
+                                         },
+                                       );
+                                     }
+                                     return SizedBox();
+                                   }),
+
+
                                   // Untuk multiple choice
                                 ],
                               ),
