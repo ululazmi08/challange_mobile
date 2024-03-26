@@ -224,7 +224,7 @@ class LoginPage extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      controller.loginBiometric();
+                      controller.doBiometric();
                     },
                     borderRadius: BorderRadius.circular(4),
                     child: Container(

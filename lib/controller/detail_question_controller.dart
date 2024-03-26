@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:challange_mobile/model/detail_question_model.dart';
 import 'package:challange_mobile/model/save_answer_model.dart';
-import 'package:challange_mobile/route/route_name.dart';
 import 'package:challange_mobile/service/detail_question_service.dart';
+import 'package:challange_mobile/service/send_answer_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailQuestionController extends GetxController {
@@ -12,11 +13,10 @@ class DetailQuestionController extends GetxController {
   var loadingQuestion = false.obs;
   var currentIndex = 0.obs;
   var selectedOptionIndex = (-1).obs; // Initialize with -1
-  var seconds = 5.obs;
+  var seconds = 30.obs;
   late Timer _timer;
   var isCheckedList = <bool>[].obs;
-
-  List<SaveAnswer> answers = [];
+  var selectedAnswer = <SaveAnswer>[].obs;
 
   @override
   void onInit() {
@@ -66,23 +66,42 @@ class DetailQuestionController extends GetxController {
 
     }
   }
+
   void toggleCheckbox(int index) {
+    String selectedOptionId = detailQuestion.value!.question[currentIndex.toInt()].options[index].optionid;
+    if (isCheckedList[index]) {
+      // Remove ID from list if unchecked
+      selectedAnswer.remove(SaveAnswer(questionId: detailQuestion.value!.question[currentIndex.toInt()].questionid, answerIds: [selectedOptionId]));
+    } else {
+      // Add ID to list if checked
+      selectedAnswer.add(SaveAnswer(questionId: detailQuestion.value!.question[currentIndex.toInt()].questionid, answerIds: [selectedOptionId]));
+    }
     isCheckedList[index] = !isCheckedList[index];
   }
 
-  void addAnswer(String questionId, dynamic answer) {
-    answers.add(SaveAnswer(questionId: questionId, answer: answer));
-  }
-
-  List<Map<String, dynamic>> get answersJson {
-    return answers.map((answer) => answer.toJson()).toList();
-  }
-
-  void showNextQuestion() {
+  void showNextQuestion() async {
     if (currentIndex.value < detailQuestion.value!.question.length - 1) {
-      // if(detailQuestion.value!.question[currentIndex.value].){
-      //
-      // }
+      print('current Index : ${currentIndex.value}\nquestion lenght : ${detailQuestion.value!.question.length}');
+      if(currentIndex.value == detailQuestion.value!.question.length -1){
+        print('berhasil');
+        var data = await SendAnswerService.sendAnswer(detailQuestion.value!.id, selectedAnswer);
+        if (data['status'] == true){
+          selectedAnswer.clear();
+          Get.dialog(
+              Dialog(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(data['message']),
+                  ],
+                ),
+              ),
+          );
+        } else {
+          Get.snackbar(data['message'], data['data']);
+          selectedAnswer.clear();
+        }
+      }
       currentIndex.value++;
     }
   }
@@ -97,6 +116,7 @@ class DetailQuestionController extends GetxController {
 
   void updateOptionStatus(int index) {
     selectedOptionIndex.value = index;
-    // Add logic here to handle the selected option as needed
+    String selectedOptionId = detailQuestion.value!.question[currentIndex.toInt()].options[index].optionid;
+    selectedAnswer.add(SaveAnswer(questionId: detailQuestion.value!.question[currentIndex.toInt()].questionid, answerIds: [selectedOptionId]));
   }
 }
