@@ -6,16 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-class SurveiQuestionPage extends StatelessWidget {
-  SurveiQuestionPage({Key? key}) : super(key: key);
+class SurveiQuestion extends StatelessWidget {
+  SurveiQuestion({Key? key}) : super(key: key);
   DetailQuestionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Dialog(
       backgroundColor: kColorWhite,
-      body: SafeArea(
+      alignment: Alignment.topCenter,
+      insetPadding: EdgeInsets.zero,
+      child: Container(
+        color: kColorWhite,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -25,10 +29,7 @@ class SurveiQuestionPage extends StatelessWidget {
                 style: TStyle.w500.copyWith(fontSize: 18.4),
               ),
             ),
-            Divider(
-              color: Color(0xFFD9D9D9),
-              height: 0,
-            ),
+            const Divider(color: kColorWhiteGrey, height: 0),
             Obx(
               () => controller.loadingQuestion.value
                   ? Container(
@@ -40,8 +41,10 @@ class SurveiQuestionPage extends StatelessWidget {
                       crossAxisCount: 5,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      itemCount: controller.detailQuestion.value?.question.length,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 12),
+                      itemCount:
+                          controller.detailQuestion.value?.question.length,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
                       itemBuilder: (context, index) {
@@ -50,12 +53,12 @@ class SurveiQuestionPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: controller.currentIndex.value == index
                                 ? kColorBlue.withOpacity(0.2)
-                                : kColorWhite,
+                                : (controller.selectedOptionIndex.value != -1) ? kColorBlue : kColorWhite,
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
                               color: controller.currentIndex.value == index
                                   ? kColorBlue
-                                  : Color(0xFF787878),
+                                  : controller.selectedOptionIndex.value != -1 ? kColorBlue : kColorGreySecond,
                             ),
                           ),
                           child: Text(
@@ -65,13 +68,14 @@ class SurveiQuestionPage extends StatelessWidget {
                               fontSize: 18.4,
                               color: controller.currentIndex.value == index
                                   ? kColorBlue
-                                  : Color(0xFF787878),
+                                  : controller.selectedOptionIndex.value != -1 ? kColorWhite : kColorGreySecond,
                             ),
                           ),
                         );
                       },
                     ),
-            )
+            ),
+            const SizedBox(height: 50),
           ],
         ),
       ),

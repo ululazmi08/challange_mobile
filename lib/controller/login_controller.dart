@@ -41,6 +41,7 @@ class LoginController extends GetxController {
   void login()async{
     print('Proses Login');
     if(formKeyLogin.currentState!.validate()){
+      Get.dialog(Container(child: Center(child: CircularProgressIndicator(),),),barrierDismissible: false);
       try{
         var data = await LoginService.login(nik.value.text, password.value.text);
         if(data['status'] == true){

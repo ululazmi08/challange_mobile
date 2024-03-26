@@ -1,4 +1,4 @@
-import 'package:challange_mobile/page/login_page.dart';
+import 'package:challange_mobile/page/login/login_page.dart';
 import 'package:challange_mobile/route/page_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

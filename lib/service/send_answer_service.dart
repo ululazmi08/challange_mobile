@@ -30,6 +30,10 @@ class SendAnswerService {
       "assessment_id": assessment_id,
       "answers": jsonAnswers,
     }),);
+    storage.write('json_submit', json.encode({
+      "assessment_id": assessment_id,
+      "answers": jsonAnswers,
+    }));
 
     debugPrint("SEND Answer RES : " + response.body);
     // if (response.statusCode != 200) return json.decode(response.body);
