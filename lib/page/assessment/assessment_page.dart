@@ -1,13 +1,9 @@
 import 'package:challange_mobile/controller/assessment_controller.dart';
 import 'package:challange_mobile/page/assessment/widget/assessment_item.dart';
-import 'package:challange_mobile/page/detail_question/detail_question_page.dart';
-import 'package:challange_mobile/route/route_name.dart';
-import 'package:challange_mobile/utilities/asset_constant.dart';
 import 'package:challange_mobile/utilities/colors.dart';
 import 'package:challange_mobile/utilities/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AssessmentPage extends StatelessWidget {

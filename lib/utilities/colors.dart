@@ -1,4 +1,4 @@
-import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 
 const Color kColorWhite = Color(0xFFFFFFFF);
 const Color kColorWhiteGrey = Color(0xFFD9D9D9);

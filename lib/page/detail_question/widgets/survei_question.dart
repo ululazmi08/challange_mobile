@@ -1,7 +1,6 @@
 import 'package:challange_mobile/controller/detail_question_controller.dart';
 import 'package:challange_mobile/utilities/colors.dart';
 import 'package:challange_mobile/utilities/typography.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
 import 'package:challange_mobile/utilities/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TStyle {
   static TextStyle title = const TextStyle(

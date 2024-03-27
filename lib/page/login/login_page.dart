@@ -120,11 +120,27 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 48),
-              ButtonLogin(
-                  text: 'Log in',
-                  onTap: () {
-                    controller.login();
-                  }),
+              // ButtonLogin(
+              //     text: 'Log in',
+              //     onTap: () {
+              //     }),
+              Row(
+                children: [
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: (){
+                        controller.login();
+                      },
+                      color: kColorBlue,
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      child: Text('Log in', style:TStyle.w600.copyWith(fontSize: 15, color:kColorWhite),),),
+                  ),
+                ],
+              ),
               const SizedBox(height: 16),
               Center(
                 child: Text(
@@ -133,13 +149,31 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ButtonLogin(
-                  text: 'Fingerprint',
-                  onTap: () {
-                    controller.doBiometric();
-                  },
-                  containerColor: kColorWhite,
-                  textColor: kColorBlue),
+              // ButtonLogin(
+              //     text: 'Fingerprint',
+              //     onTap: () {
+              //       controller.doBiometric();
+              //     },
+              //     containerColor: kColorWhite,
+              //     textColor: kColorBlue,
+              // ),
+              Row(
+                children: [
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: (){
+                        controller.doBiometric();
+                      },
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        side: BorderSide(color: kColorBlue)
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      child: Text('Fingerprint', style:TStyle.w600.copyWith(fontSize: 15, color:kColorBlue),),),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

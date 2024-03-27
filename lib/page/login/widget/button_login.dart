@@ -1,6 +1,5 @@
 import 'package:challange_mobile/utilities/colors.dart';
 import 'package:challange_mobile/utilities/typography.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,14 +37,10 @@ class ButtonLogin extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  text,
-                  style: TStyle.w600.copyWith(fontSize: 15, color: textColor),
-                )
-              ],
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TStyle.w600.copyWith(fontSize: 15, color: textColor),
             ),
           ),
         ),
